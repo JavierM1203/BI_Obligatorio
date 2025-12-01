@@ -606,67 +606,27 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Replace in string 2 2 2</from>
-      <to>Database lookup</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Filter rows</from>
-      <to>ft_qualifying</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Database lookup</from>
-      <to>Filter rows</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Database lookup 2</from>
-      <to>Filter rows 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>join_lap_pit</from>
-      <to>Database lookup 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Filter rows 2</from>
       <to>ft_laps</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Database lookup 2 2</from>
-      <to>Filter rows 2 2</to>
+      <from>Replace in string 2 2 2</from>
+      <to>ft_qualifying</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>join_constructor_standings_results</from>
-      <to>Database lookup 2 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Filter rows 2 2</from>
       <to>ft_constructor_standing_results</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Database lookup 2 2 2</from>
-      <to>Filter rows 2 2 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>join_driver_standings_sprints</from>
-      <to>Database lookup 2 2 2</to>
+      <to>ft_results_sprints</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Add isSprint</from>
-      <to>Database lookup 2 2 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Filter rows 2 2 2</from>
       <to>ft_results_sprints</to>
       <enabled>Y</enabled>
     </hop>
@@ -1767,7 +1727,7 @@ FROM dbo.driver_standings_staging
       </output>
     </remotesteps>
     <GUI>
-      <xloc>944</xloc>
+      <xloc>768</xloc>
       <yloc>704</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1851,7 +1811,7 @@ FROM dbo.driver_standings_staging
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1072</xloc>
+      <xloc>880</xloc>
       <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1931,7 +1891,7 @@ FROM dbo.driver_standings_staging
       </output>
     </remotesteps>
     <GUI>
-      <xloc>704</xloc>
+      <xloc>560</xloc>
       <yloc>880</yloc>
       <draw>Y</draw>
     </GUI>
@@ -4100,8 +4060,8 @@ FROM dbo.sprint_results_staging
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1248</xloc>
-      <yloc>176</yloc>
+      <xloc>1040</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -4205,449 +4165,7 @@ FROM dbo.sprint_results_staging
     </remotesteps>
     <GUI>
       <xloc>592</xloc>
-      <yloc>48</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Database lookup</name>
-    <type>DBLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>F1</connection>
-    <cache>N</cache>
-    <cache_load_all>N</cache_load_all>
-    <cache_size>0</cache_size>
-    <lookup>
-      <schema>datawarehouse</schema>
-      <table>ft_qualifying</table>
-      <orderby/>
-      <fail_on_multiple>N</fail_on_multiple>
-      <eat_row_on_failure>N</eat_row_on_failure>
-      <key>
-        <name>qualifyId</name>
-        <field>qualifyId</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>qualifyId</name>
-        <rename>qualifyId_db</rename>
-        <default/>
-        <type>Integer</type>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>512</xloc>
-      <yloc>880</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Filter rows</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <send_true_to>ft_qualifying</send_true_to>
-    <send_false_to/>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <leftvalue>qualifyId</leftvalue>
-        <function>IS NULL</function>
-        <rightvalue/>
-      </condition>
-    </compare>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>608</xloc>
-      <yloc>880</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Database lookup 2</name>
-    <type>DBLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>F1</connection>
-    <cache>N</cache>
-    <cache_load_all>N</cache_load_all>
-    <cache_size>0</cache_size>
-    <lookup>
-      <schema>datawarehouse</schema>
-      <table>ft_laps</table>
-      <orderby/>
-      <fail_on_multiple>N</fail_on_multiple>
-      <eat_row_on_failure>N</eat_row_on_failure>
-      <key>
-        <name>raceId</name>
-        <field>raceId</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>driverId</name>
-        <field>driverId</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>lap</name>
-        <field>lap</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>raceId</name>
-        <rename>raceId_db</rename>
-        <default/>
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>driverId</name>
-        <rename>driverId_db</rename>
-        <default/>
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>lap</name>
-        <rename>lap_db</rename>
-        <default/>
-        <type>Integer</type>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>720</xloc>
-      <yloc>704</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Filter rows 2</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <send_true_to>ft_laps</send_true_to>
-    <send_false_to/>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <conditions>
-          <condition>
-            <negated>N</negated>
-            <leftvalue>raceId_db</leftvalue>
-            <function>IS NULL</function>
-            <rightvalue/>
-          </condition>
-          <condition>
-            <negated>N</negated>
-            <operator>AND</operator>
-            <leftvalue>driverId_db</leftvalue>
-            <function>IS NULL</function>
-            <rightvalue/>
-          </condition>
-          <condition>
-            <negated>N</negated>
-            <operator>AND</operator>
-            <leftvalue>lap_db</leftvalue>
-            <function>IS NULL</function>
-            <rightvalue/>
-          </condition>
-        </conditions>
-      </condition>
-    </compare>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>816</xloc>
-      <yloc>704</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Database lookup 2 2</name>
-    <type>DBLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>F1</connection>
-    <cache>N</cache>
-    <cache_load_all>N</cache_load_all>
-    <cache_size>0</cache_size>
-    <lookup>
-      <schema>datawarehouse</schema>
-      <table>ft_constructor_standing_results</table>
-      <orderby/>
-      <fail_on_multiple>N</fail_on_multiple>
-      <eat_row_on_failure>N</eat_row_on_failure>
-      <key>
-        <name>constructorStandingsId</name>
-        <field>constructorStandingsId</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>constructorResultsId</name>
-        <field>constructorResultsId</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>constructorStandingsId</name>
-        <rename>constructorStandingsId_db</rename>
-        <default/>
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>constructorResultsId</name>
-        <rename>constructorResultsId_db</rename>
-        <default/>
-        <type>Integer</type>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>848</xloc>
-      <yloc>448</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Filter rows 2 2</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <send_true_to>ft_constructor_standing_results</send_true_to>
-    <send_false_to/>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <conditions>
-          <condition>
-            <negated>N</negated>
-            <leftvalue>constructorStandingsId_db</leftvalue>
-            <function>IS NULL</function>
-            <rightvalue/>
-          </condition>
-          <condition>
-            <negated>N</negated>
-            <operator>AND</operator>
-            <leftvalue>constructorResultsId_db</leftvalue>
-            <function>IS NULL</function>
-            <rightvalue/>
-          </condition>
-        </conditions>
-      </condition>
-    </compare>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>944</xloc>
-      <yloc>448</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Database lookup 2 2 2</name>
-    <type>DBLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>F1</connection>
-    <cache>N</cache>
-    <cache_load_all>N</cache_load_all>
-    <cache_size>0</cache_size>
-    <lookup>
-      <schema>datawarehouse</schema>
-      <table>ft_results_sprints</table>
-      <orderby/>
-      <fail_on_multiple>N</fail_on_multiple>
-      <eat_row_on_failure>N</eat_row_on_failure>
-      <key>
-        <name>driverStandingsId</name>
-        <field>driverStandingsId</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>resultId</name>
-        <field>resultId</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>isSprint</name>
-        <field>isSprint</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>driverStandingsId</name>
-        <rename>driverStandingsId_db</rename>
-        <default/>
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>resultId</name>
-        <rename>resultId_db</rename>
-        <default/>
-        <type>Integer</type>
-      </value>
-      <value>
-        <name>isSprint</name>
-        <rename>isSprint_db</rename>
-        <default/>
-        <type>Boolean</type>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1008</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Filter rows 2 2 2</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <send_true_to>ft_results_sprints</send_true_to>
-    <send_false_to/>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <conditions>
-          <condition>
-            <negated>N</negated>
-            <leftvalue>driverStandingsId_db</leftvalue>
-            <function>IS NULL</function>
-            <rightvalue/>
-          </condition>
-          <condition>
-            <negated>N</negated>
-            <operator>AND</operator>
-            <leftvalue>resultId_db</leftvalue>
-            <function>IS NULL</function>
-            <rightvalue/>
-          </condition>
-          <condition>
-            <negated>N</negated>
-            <operator>AND</operator>
-            <leftvalue>isSprint_db</leftvalue>
-            <function>IS NULL</function>
-            <rightvalue/>
-          </condition>
-        </conditions>
-      </condition>
-    </compare>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1120</xloc>
-      <yloc>176</yloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
